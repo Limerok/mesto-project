@@ -1,0 +1,11 @@
+.post__like{
+  background-image: url(../../../images/icon-like.svg);
+  min-width: 22px;
+  min-height: 19px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.post__like:hover{
+  background-image: url(../../../images/icon-like-hover.svg);
+}

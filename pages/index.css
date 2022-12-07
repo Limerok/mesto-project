@@ -1,0 +1,41 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts.css);
+
+@import url(../blocks/pages/pages.css);
+
+@import url(../blocks/pages/__header/pages__header.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+
+@import url(../blocks/pages/__profile/pages__profile.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info-item/profile__info-item.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__edit/profile__edit.css);
+@import url(../blocks/profile/__description/profile__description.css);
+@import url(../blocks/profile/__add-post/profile__add-post.css);
+
+@import url(../blocks/pages/__posts/pages__posts.css);
+@import url(../blocks/posts/posts.css);
+@import url(../blocks/posts/__list/posts__list.css);
+@import url(../blocks/post/post.css);
+@import url(../blocks/post/__image/post__image.css);
+@import url(../blocks/post/__group/post__group.css);
+@import url(../blocks/post/__name/post__name.css);
+@import url(../blocks/post/__like/post__like.css);
+@import url(../blocks/post/__like/_active/post__like_active.css);
+
+@import url(../blocks/pages/__footer/pages__footer.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+@import url(../blocks/popap/popap.css);
+@import url(../blocks/popap/_opened/popup_opened.css);
+@import url(../blocks/popap/__container/popup__container.css);
+@import url(../blocks/popap/__title/popap__title.css);
+@import url(../blocks/popap/__input-container/popap__input-container.css);
+@import url(../blocks/popap/__input-text/popap__input-text.css);
+@import url(../blocks/popap/__button-submit/popap__button-submit.css);
+@import url(../blocks/popap/__close/popap__close.css);

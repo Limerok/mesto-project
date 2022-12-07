@@ -1,0 +1,23 @@
+.profile__add-post{
+  max-width: 150px;
+  min-height: 50px;
+  width: 100%;
+  background-image: url(../../../images/icon-add.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 2px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.profile__add-post:hover{
+  opacity: 0.6;
+}
+
+@media (max-width: 755px) {
+  .profile__add-post{
+    margin-top: 10px;
+    max-width: 750px;
+  }
+}

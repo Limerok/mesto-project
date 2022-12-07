@@ -1,0 +1,24 @@
+.profile{
+  max-width: 880px;
+  color: #fff;
+  display: grid;
+  grid-template-columns: fit-content(120px) fit-content(336px) minmax(150px, 1fr);
+  justify-items: end;
+  align-items: center;
+  column-gap: 30px;
+  row-gap: 26px;
+}
+
+@media (max-width: 918px) {
+  .profile{
+    padding: 0 19px;
+  }
+}
+
+@media (max-width: 755px) {
+  .profile{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

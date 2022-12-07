@@ -1,0 +1,9 @@
+.posts{
+  max-width: 880px;
+}
+
+@media (max-width: 918px) {
+  .posts{
+    padding: 0 19px;
+  }
+}

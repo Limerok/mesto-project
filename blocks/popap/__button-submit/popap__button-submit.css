@@ -1,0 +1,25 @@
+.popap__button-submit{
+  margin: 18px 0 0;
+  padding: 14px 0;
+  border: none;
+  background-color: #000;
+  border-radius: 2px;
+  font: inherit;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  transition: 0.4s;
+}
+.popap__button-submit:hover{
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width:560px) {
+  .popap__button-submit{
+    margin: 15px 0 0;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

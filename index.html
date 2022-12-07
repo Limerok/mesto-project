@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Блог путешественника о путешествиях</title>
+  <meta name="description" content="Блог популярного Travel блоггера. Самые красивые места в России.">
+  <meta name="keywords" content="Блог о путешествиях, красивые местра Росии, путешествия по России,">
+  <meta name="author" content="Слаутин Алексей">
+  <meta name="copyright" content="Все права принадлежат: ООО 'Яндекс'">
+
+  <link rel="icon" type="image/svg+xml" href="./images/favicon/favicon.svg">
+
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body>
+  <div class="pages">
+    <header class="header pages__header">
+      <img class="header__logo" src="./images/logo/logo.svg" alt="Логотип блога Mesto Russia">
+    </header>
+    <section class="profile pages__profile">
+      <img class="profile__avatar" src="./images/avatar.jpg" alt="Лицо человека в красной шапке на фоне моря">
+      <div class="profile__info">
+        <div class="profile__info-item">
+          <h1 class="profile__name">
+            Жак-Ив Кусто
+          </h1>
+          <div class="profile__edit"></div>
+        </div>
+        <p class="profile__description">
+          Исследователь океана
+        </p>
+      </div>
+      <div class="profile__add-post"></div>
+    </section>
+    <section class="posts pages__posts">
+      <ul class="posts__list">
+        <li class="post">
+          <img class="post__image" src="./images/post-karachaevsk.jpg" alt="Старинный христианский храм расположенный на краю горного хребта">
+          <div class="post__group">
+            <p class="post__name">Карачаевск</p>
+            <div class="post__like post__like_active"></div>
+          </div>
+        </li>
+        <li class="post">
+          <img class="post__image" src="./images/post-elbrus.jpg" alt="Пейзаж природы: огромное холмистое поле на фоне заката, в далеке видна гора Эльбрус">
+          <div class="post__group">
+            <p class="post__name">Гора Эльбрус</p>
+            <div class="post__like"></div>
+          </div>
+        </li>
+        <li class="post">
+          <img class="post__image" src="./images/post-dombai.jpg" alt="Горы Кавказа на фоне серого неба, вдалеке возвушается самая высокая часть хребта 'Большого Кавказа'">
+          <div class="post__group">
+            <p class="post__name">Домбай</p>
+            <div class="post__like"></div>
+          </div>
+        </li>
+        <li class="post">
+          <img class="post__image" src="./images/post-elbrus.jpg" alt="Пейзаж природы: огромное холмистое поле на фоне заката, в далеке видна гора Эльбрус">
+          <div class="post__group">
+            <p class="post__name">Гора Эльбрус</p>
+            <div class="post__like"></div>
+          </div>
+        </li>
+        <li class="post">
+          <img class="post__image" src="./images/post-dombai.jpg" alt="Горы Кавказа на фоне серого неба, вдалеке возвушается самая высокая часть хребта 'Большого Кавказа'">
+          <div class="post__group">
+            <p class="post__name">Домбай</p>
+            <div class="post__like"></div>
+          </div>
+        </li>
+        <li class="post">
+          <img class="post__image" src="./images/post-karachaevsk.jpg" alt="Старинный христианский храм расположенный на краю горного хребта">
+          <div class="post__group">
+            <p class="post__name">Карачаево-Черкесия</p>
+            <div class="post__like"></div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="popap">
+      <form action="" class="popup__container">
+        <img class="popap__close" src="./images/icon-close.svg" alt="Иконка крестик">
+        <h2 class="popap__title">
+          Редактировать профиль
+        </h2>
+        <fieldset class="popap__input-container">
+          <input class="popap__input-text" type="text" placeholder="Ваше Имя и Фамилия" value="Жак-Ив Кусто">
+          <input class="popap__input-text" type="text" placeholder="О себе" value="Исследователь океана">
+        </fieldset>
+        <fieldset class="popap__input-container">
+          <button class="popap__button-submit" type="submit">Сохранить</button>
+        </fieldset>
+      </form>
+    </section>
+    <footer class="footer pages__footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
+  </div>
+</body>
+</html>
