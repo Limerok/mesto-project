@@ -4,13 +4,22 @@
   padding: 7px;
   box-sizing: border-box;
   border: 1px solid #fff;
-  display: inline-block;
+  background: none;
   background-image: url(../../../images/icon-edit.svg);
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: 10px 10px;
   cursor: pointer;
   transition: 0.4s;
 }
 .profile__edit:hover{
   opacity: 0.6;
+}
+
+@media (max-width: 755px) {
+  .profile__edit{
+    min-width: 18px;
+    min-height: 18px;
+    background-size: 7.5px 7.5px;
+  }
 }

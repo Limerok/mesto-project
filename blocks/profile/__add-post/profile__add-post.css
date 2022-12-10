@@ -2,9 +2,11 @@
   max-width: 150px;
   min-height: 50px;
   width: 100%;
+  background: none;
   background-image: url(../../../images/icon-add.svg);
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: 22px 22px;
   border: 2px solid #FFFFFF;
   box-sizing: border-box;
   border-radius: 2px;
@@ -17,7 +19,8 @@
 
 @media (max-width: 755px) {
   .profile__add-post{
-    margin-top: 10px;
+    margin-top: 8px;
     max-width: 750px;
+    background-size: 16px 16px;
   }
 }

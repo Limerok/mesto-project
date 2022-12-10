@@ -1,4 +1,19 @@
 .post__image{
+  max-width: 282px;
+  max-height: 282px;
   width: 100%;
+  object-fit: cover;
   border-radius: 10px 10px 0 0;
+}
+
+@media (max-width:918px) {
+  .post__image{
+    max-width: 430px;
+  }
+}
+
+@media (max-width:621px) {
+  .post__image{
+    max-width: 100%;
+  }
 }

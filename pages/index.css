@@ -31,11 +31,11 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
-@import url(../blocks/popap/popap.css);
-@import url(../blocks/popap/_opened/popup_opened.css);
-@import url(../blocks/popap/__container/popup__container.css);
-@import url(../blocks/popap/__title/popap__title.css);
-@import url(../blocks/popap/__input-container/popap__input-container.css);
-@import url(../blocks/popap/__input-text/popap__input-text.css);
-@import url(../blocks/popap/__button-submit/popap__button-submit.css);
-@import url(../blocks/popap/__close/popap__close.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__input-container/popup__input-container.css);
+@import url(../blocks/popup/__input-text/popup__input-text.css);
+@import url(../blocks/popup/__button-submit/popup__button-submit.css);
+@import url(../blocks/popup/__close/popup__close.css);

@@ -1,11 +1,15 @@
 .post__like{
+  background: none;
   background-image: url(../../../images/icon-like.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 22px 19px;
+  border: none;
   min-width: 22px;
   min-height: 19px;
-  background-repeat: no-repeat;
   cursor: pointer;
   transition: 0.4s;
 }
 .post__like:hover{
-  background-image: url(../../../images/icon-like-hover.svg);
+  opacity: 0.5;
 }
