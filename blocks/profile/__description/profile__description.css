@@ -16,3 +16,9 @@
     line-height: 17px;
   }
 }
+
+@media (max-width: 370px) {
+  .profile__description{
+    max-width: 280px;
+  }
+}
