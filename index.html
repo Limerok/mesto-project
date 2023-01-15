@@ -36,47 +36,7 @@
       </section>
       <section class="posts pages__posts">
         <ul class="posts__list">
-          <li class="post">
-            <img class="post__image" src="./images/post-karachaevsk.jpg" alt="Старинный христианский храм расположенный на краю горного хребта">
-            <div class="post__group">
-              <h2 class="post__name">Карачаевск</h2>
-              <button class="post__like post__like_active" type="button" aria-label="Мне нравится"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img class="post__image" src="./images/post-elbrus.jpg" alt="Пейзаж природы: огромное холмистое поле на фоне заката, в далеке видна гора Эльбрус">
-            <div class="post__group">
-              <h2 class="post__name">Гора Эльбрус</h2>
-              <button class="post__like" type="button" aria-label="Мне нравится"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img class="post__image" src="./images/post-dombai.jpg" alt="Горы Кавказа на фоне серого неба, вдалеке возвушается самая высокая часть хребта 'Большого Кавказа'">
-            <div class="post__group">
-              <h2 class="post__name">Домбай</h2>
-              <button class="post__like" type="button" aria-label="Мне нравится"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img class="post__image" src="./images/post-elbrus.jpg" alt="Пейзаж природы: огромное холмистое поле на фоне заката, в далеке видна гора Эльбрус">
-            <div class="post__group">
-              <h2 class="post__name">Гора Эльбрус</h2>
-              <button class="post__like" type="button" aria-label="Мне нравится"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img class="post__image" src="./images/post-dombai.jpg" alt="Горы Кавказа на фоне серого неба, вдалеке возвушается самая высокая часть хребта 'Большого Кавказа'">
-            <div class="post__group">
-              <h2 class="post__name">Домбай</h2>
-              <button class="post__like" type="button" aria-label="Мне нравится"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img class="post__image" src="./images/post-karachaevsk.jpg" alt="Старинный христианский храм расположенный на краю горного хребта">
-            <div class="post__group">
-              <h2 class="post__name">Карачаево-Черкесия</h2>
-              <button class="post__like" type="button" aria-label="Мне нравится"></button>
-            </div>
+          
           </li>
         </ul>
       </section>
@@ -87,19 +47,47 @@
     <div class="popup">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
-        <form action="#" name="edit-profile">
+        <form class="popup__form" action="#" name="edit-profile">
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
           <fieldset class="popup__input-container">
-            <input class="popup__input-text" name="name-surname" type="text" placeholder="Ваше Имя и Фамилия" value="Жак-Ив Кусто">
-            <input class="popup__input-text" name="about-me" type="text" placeholder="О себе" value="Исследователь океана">
+            <input class="popup__input-text" name="name-surname" type="text" placeholder="Ваше Имя и Фамилия">
+            <input class="popup__input-text" name="about-me" type="text" placeholder="О себе">
           </fieldset>
           <fieldset class="popup__input-container">
-            <button class="popup__button-submit" type="submit">Сохранить</button>
+            <button class="popup__button-submit" name="saved-profil" type="submit">Сохранить</button>
           </fieldset>
         </form>
+        <form class="popup__form" action="#" name="new-post">
+          <h2 class="popup__title">
+            Новое место
+          </h2>
+          <fieldset class="popup__input-container">
+            <input class="popup__input-text" name="name-post" type="text" placeholder="Название" required>
+            <input class="popup__input-text" name="link-image" type="text" placeholder="Ссылка на картинку" required>
+          </fieldset>
+          <fieldset class="popup__input-container">
+            <button class="popup__button-submit" name="saved-post" type="submit">Создать</button>
+          </fieldset>
+        </form>
+        <div class="popup__zoom">
+          <img class="popup__zoom-image" src="" alt="">
+          <p class="popup__zoom-description"></p>
+        </div>
       </div>
     </div>
+    <template id="template-post">
+      <li class="post">
+        <button class="post__trash" type="button" aria-label="Удалить пост"></button>
+        <img class="post__image" src="" alt="">
+        <div class="post__group">
+          <h2 class="post__name"></h2>
+          <button class="post__like" type="button" aria-label="Мне нравится"></button>
+        </div>
+      </li>
+    </template>
+
+    <script src="./script/script.js"></script>
 </body>
 </html>

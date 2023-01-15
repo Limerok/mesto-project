@@ -1,9 +1,10 @@
 .post__image{
   max-width: 282px;
-  max-height: 282px;
+  height: 282px;
   width: 100%;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
+  cursor: pointer;
 }
 
 @media (max-width:918px) {

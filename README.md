@@ -5,7 +5,7 @@
 
 
 ### Используемые технологии при разработке: 
-Html5 (header , main , footer , section , h1-h6, flex, grid), Css (реализованно состояние :hover для элементов, используются media ), БЭМ - методология (файловая система и классы), сжатие фотографий (FileOptimizer), Validation Service (W3.org), система контроля версий Git, Удаленный репозиторий Git-Hub, консоль Git-Bash.
+Html5 (header , main , footer , section , h1-h6, flex, grid), Css (реализованно состояние :hover для элементов, используются media ) JavaScript (работа с Dom-деревом; добавление стилей, классов, значений; реализованно открытие popup окон, заполнение информации и добавление постов, удаление постов), БЭМ - методология (файловая система и классы), сжатие фотографий (FileOptimizer), Validation Service (W3.org), система контроля версий Git, Удаленный репозиторий Git-Hub, консоль Git-Bash.
 
 
 * [Ссылка на проект Git-Hub Pages](https://limerok.github.io/mesto-project/)
