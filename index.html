@@ -44,37 +44,37 @@
     <footer class="footer pages__footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_edit-profile">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
         <form class="popup__form" action="#" name="edit-profile">
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
-          <fieldset class="popup__input-container">
             <input class="popup__input-text" name="name-surname" type="text" placeholder="Ваше Имя и Фамилия">
             <input class="popup__input-text" name="about-me" type="text" placeholder="О себе">
-          </fieldset>
-          <fieldset class="popup__input-container">
             <button class="popup__button-submit" name="saved-profil" type="submit">Сохранить</button>
-          </fieldset>
         </form>
+      </div>
+    </div>
+    <div class="popup popup_add-post">
+      <div class="popup__container">
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
         <form class="popup__form" action="#" name="new-post">
           <h2 class="popup__title">
             Новое место
           </h2>
-          <fieldset class="popup__input-container">
             <input class="popup__input-text" name="name-post" type="text" placeholder="Название" required>
             <input class="popup__input-text" name="link-image" type="text" placeholder="Ссылка на картинку" required>
-          </fieldset>
-          <fieldset class="popup__input-container">
             <button class="popup__button-submit" name="saved-post" type="submit">Создать</button>
-          </fieldset>
         </form>
-        <div class="popup__zoom">
-          <img class="popup__zoom-image" src="" alt="">
-          <p class="popup__zoom-description"></p>
-        </div>
+      </div>
+    </div>
+    <div class="popup popup_zoom-image">
+      <div class="popup__container">
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <img class="popup__zoom-image" src="">
+        <p class="popup__zoom-description"></p>
       </div>
     </div>
     <template id="template-post">

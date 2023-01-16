@@ -1,12 +1,14 @@
 const postsList = document.querySelector('.posts__list'),
   templatePost = document.querySelector('#template-post').content,
-  popup = document.querySelector('.popup'),
-  popupZoom = document.querySelector('.popup__zoom'),
-  popupForm = document.querySelectorAll('.popup__form'),
+  popupEditProfile = document.querySelector('.popup_edit-profile'),
   profileName = document.querySelector('.profile__name'),
   profileDescription = document.querySelector('.profile__description'),
-  popupInputText = document.querySelectorAll('.popup__input-text'),
+  popupAddPost = document.querySelector('.popup_add-post'),
+  popupZoomImage = document.querySelector('.popup_zoom-image'),
+  zoomImage = popupZoomImage.querySelector('.popup__zoom-image'),
+  zoomDescription = popupZoomImage.querySelector('.popup__zoom-description'),
   formElement = document.querySelectorAll('form');
+
 
 //Карточки при загрузке
 const initialCards = [
@@ -50,115 +52,51 @@ initialCards.forEach((item) => {
   postsList.append(newPost);
 })
 
-//Скрытие форм
-function hiddenPopap() {
-  popupZoom.setAttribute('style', 'display: none');
-  popupForm.forEach((item) => {
-    item.setAttribute('style', 'display: none');
-  })
-}
-
-//Закрытие popup
-function closePopup() {
-  popup.setAttribute('style', 'background-color: rgba(0, 0, 0, 0.5);');
-  popup.classList.remove('popup_opened');
-}
-
-//Открытие картинки
-function openImage(target) {
-  hiddenPopap();
-  const postName = target.closest('.post').querySelector('.post__name'),
-    popupZoomImage = popupZoom.querySelector('.popup__zoom-image'),
-    popupZoomDescription = popupZoom.querySelector('.popup__zoom-description');
-
-  popupZoomImage.src = target.getAttribute('src');
-  popupZoomImage.alt = target.getAttribute('alt');
-  popupZoomDescription.textContent = postName.textContent;
-  popup.setAttribute('style', 'background-color: rgba(0, 0, 0, 0.9);');
-  popupZoom.setAttribute('style', 'display: block;')
-  popup.classList.add('popup_opened');
-}
-
-//Открытие редактора Профиля
+//Получение данных профиля
 function editProfil() {
-  hiddenPopap();
-  popup.classList.add('popup_opened');
-
-  popupInputText.forEach((item) => {
+  const inputText = popupEditProfile.querySelectorAll('.popup__input-text');
+  inputText.forEach((item) => {
     if (item.getAttribute('name') === 'name-surname') {
       item.value = profileName.textContent.trim();
     } else if (item.getAttribute('name') === 'about-me') {
       item.value = profileDescription.textContent.trim();
     }
   })
-  popupForm.forEach((item) => {
-    if (item.getAttribute('name') === 'edit-profile') {
-      item.setAttribute('style', 'display: block');
-    } 
-  })
 }
 
-//Открытие добавления Поста
-function addNewPost() {
-  hiddenPopap();
-  popup.classList.add('popup_opened');
-
-  popupInputText.forEach((item) => {
+//Обновление полей нового Поста
+function reloadPostInput(inputForm) {
+  inputForm.forEach((item) => {
     if (item.getAttribute('name') === 'name-post') {
       item.value = '';
     } else if (item.getAttribute('name') === 'link-image') {
       item.value= '';
     }
   })
-
-  popupForm.forEach((item) => {
-    if (item.getAttribute('name') === 'new-post') {
-      item.setAttribute('style', 'display: block');
-    } 
-  })
 }
 
-document.addEventListener('click', (event) => {
+//Открытие фотографии
+function openImage(target) {
+  const imageSrc = target.getAttribute('src'),
+   postName = target.closest('.post').querySelector('.post__name').textContent;
 
-  let target = event.target;
+  zoomImage.src = imageSrc;
+  zoomDescription.textContent = postName;
+}
 
-  if (target.classList.contains('post__trash')) { //Удаление карточки
-    target.closest('.post').remove();
-  } else if (target.classList.contains('post__like')) { //Лайк карточки
-    target.classList.toggle('post__like_active');
-  } else if (target.classList.contains('post__image')) {//Открытие картинки
-    openImage(target);
-  } else if (target.classList.contains('popup__close')) {//Закрытие popup
-    closePopup();
-  } else if (target.classList.contains('profile__edit')) {//Редактор профиля
-    editProfil();
-  } else if (target.classList.contains('profile__add-post')) {//Открытие добавления поста
-    addNewPost();
-  }
-})
+//Закрытие по кнопке Отправить
+function hiddenPopap(target) {
+  target.closest('.popup_opened').classList.remove('popup_opened');
+}
 
-
-//Отправка формы
-function savedProfil (form) {
-  const inputForm = form.querySelectorAll('.popup__input-text');
-
+//Сохранение инпутов
+function saveInput(inputForm, newPost) {
   inputForm.forEach((item) => {
     if (item.getAttribute('name') === 'name-surname') {
       profileName.textContent = item.value.trim();
     } else if (item.getAttribute('name') === 'about-me') {
       profileDescription.textContent = item.value.trim();
-    }
-  })
-
-  closePopup();
-}
-
-function savedPost (form) {
-  const inputForm = form.querySelectorAll('.popup__input-text'),
-    newPost = templatePost.querySelector('.post').cloneNode(true);
-
-  inputForm.forEach((item) => {
-    if (item.getAttribute('name') === 'name-post') {
+    } else if (item.getAttribute('name') === 'name-post') {
       newPost.querySelector('.post__name').textContent = item.value.trim();
       item.value = '';
     } else if (item.getAttribute('name') === 'link-image') {
@@ -166,22 +104,47 @@ function savedPost (form) {
       item.value= '';
     }
   })
-  
-  postsList.prepend(newPost);
-  closePopup();
 }
 
-formElement.forEach((item) => {
-  if (item.getAttribute('name') === 'edit-profile') {
-    item.addEventListener('submit', (event) => {
-      event.preventDefault();
-      savedProfil(item);
-    })
-  } else if (item.getAttribute('name') === 'new-post') {
-    item.addEventListener('submit', (event) => {
-      event.preventDefault();
-      savedPost(item);
-    })
+//Реакции на события
+document.addEventListener('click', (event) => {
+  let target = event.target;
+
+  if (target.classList.contains('profile__edit')) {//Редактор профиля
+    editProfil();
+    popupEditProfile.classList.add('popup_opened');
+  } else if (target.classList.contains('profile__add-post')) {//Добавление поста
+    const inputForm = popupAddPost.querySelectorAll('.popup__input-text');
+    reloadPostInput(inputForm);
+    popupAddPost.classList.add('popup_opened');
+  } else if (target.classList.contains('post__image')) {//Зум изображения
+    openImage(target);
+    popupZoomImage.classList.add('popup_opened');
+  } else if (target.classList.contains('popup__close') ||
+  target.classList.contains('popup')) {//Закрытие popup
+    target.closest('.popup_opened').classList.remove('popup_opened');
+  } else if (target.classList.contains('post__like')) { //Лайк карточки
+    target.classList.toggle('post__like_active');
+  } else if (target.classList.contains('post__trash')) { //Удаление карточки
+    target.closest('.post').remove();
   }
 })
 
+document.addEventListener('submit', (event) => {
+  event.preventDefault();
+  let target = event.target;
+
+  if (target.getAttribute('name') === 'edit-profile') {
+    const inputForm = target.querySelectorAll('.popup__input-text');
+    
+    saveInput(inputForm);
+    hiddenPopap(target);
+  } else if (target.getAttribute('name') === 'new-post') {
+    const inputForm = target.querySelectorAll('.popup__input-text'),
+      newPost = templatePost.querySelector('.post').cloneNode(true);
+    
+    saveInput(inputForm, newPost);
+    postsList.prepend(newPost);
+    hiddenPopap(target);
+  }
+})
