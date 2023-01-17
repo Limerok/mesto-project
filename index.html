@@ -47,12 +47,12 @@
     <div class="popup popup_edit-profile">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
-        <form class="popup__form" action="#" name="edit-profile">
+        <form class="popup__form" id="saved-profil" action="#" name="edit-profile">
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
-            <input class="popup__input-text" name="name-surname" type="text" placeholder="Ваше Имя и Фамилия">
-            <input class="popup__input-text" name="about-me" type="text" placeholder="О себе">
+            <input class="popup__input-text" id="profil-name-surname" name="name-surname" type="text" placeholder="Ваше Имя и Фамилия">
+            <input class="popup__input-text" id="profil-about-me" name="about-me" type="text" placeholder="О себе">
             <button class="popup__button-submit" name="saved-profil" type="submit">Сохранить</button>
         </form>
       </div>
@@ -60,12 +60,12 @@
     <div class="popup popup_add-post">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
-        <form class="popup__form" action="#" name="new-post">
+        <form class="popup__form" id="new-post" action="#" name="new-post">
           <h2 class="popup__title">
             Новое место
           </h2>
-            <input class="popup__input-text" name="name-post" type="text" placeholder="Название" required>
-            <input class="popup__input-text" name="link-image" type="text" placeholder="Ссылка на картинку" required>
+            <input class="popup__input-text" id="post-name" name="name-post" type="text" placeholder="Название" required>
+            <input class="popup__input-text" id="post-link" name="link-image" type="text" placeholder="Ссылка на картинку" required>
             <button class="popup__button-submit" name="saved-post" type="submit">Создать</button>
         </form>
       </div>
@@ -88,6 +88,7 @@
       </li>
     </template>
 
-    <script src="./script/script.js"></script>
+    <script src="./vendor/cards.js"></script>
+    <script src="./script/index.js"></script>
 </body>
 </html>
