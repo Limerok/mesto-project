@@ -7,10 +7,10 @@ const profileEdit = document.querySelector('.profile__edit'),
   profileDescription = document.querySelector('.profile__description'),
   inputNameSurname = document.querySelector('#profil-name-surname'),
   inputAboutMe = document.querySelector('#profil-about-me'),
-  buttonSaveProfil = document.querySelector('#saved-profil'),
+  formEditProfil = document.querySelector('#saved-profil'),
   templatePost = document.querySelector('#template-post').content,
   cardsContainer = document.querySelector('.posts__list'),
-  buttonAddPost = document.querySelector('#new-post'),
+  formAddPost = document.querySelector('#new-post'),
   inputPostName = document.querySelector('#post-name'),
   inputPostLink = document.querySelector('#post-link'),
   popupZoomImage = document.querySelector('.popup_zoom-image'),
@@ -28,49 +28,36 @@ function closePopap(popup) {
 }
 
 //Получение данных профиля
-function gettingDataProfil(name, about) {
+function getDataProfil(name, about) {
   inputNameSurname.value = name.textContent.trim();
   inputAboutMe.value = about.textContent.trim();
 }
 
-//Сброс значений формы
-function resetForm(popup) {
-  const form = popup.querySelector('form');
-  form.reset();
-}
-
 //Сохранение данных профиля
-function savedProfil(event) {
+function saveProfil(event) {
   event.preventDefault();
-  const target = event.target;
 
   profileName.textContent = inputNameSurname.value.trim();
   profileDescription.textContent = inputAboutMe.value.trim();
-  closePopap(target.closest('.popup'))
+  closePopap(popupEditProfile);
 }
 
 //добавление события :Лайк поста
 function likePost(like) {
-  like.addEventListener('click', () => {
     like.classList.toggle('post__like_active');
-  })
 }
 
 //добавление события :Удаление поста
 function trashPost(trash) {
-  trash.addEventListener('click', () => {
     trash.closest('.post').remove();
-  })
 }
 
 //добавление события :Открытие большого изображения
 function openImage(image, name) {
-  image.addEventListener('click', () => {
-    popupZoomImage.classList.add('popup_opened');
     imageZoom.src = image.getAttribute('src');
+    imageZoom.alt = name;
     descriptionZoom.textContent = name;
-    console.log(image)
-  })
+    openPopup(popupZoomImage);
 }
 
 //Генерация нового поста (перед добавлением)
@@ -78,14 +65,22 @@ function renderPost(img, name) {
   const clonePost = templatePost.querySelector('.post').cloneNode(true),
     buttonLike = clonePost.querySelector('.post__like'),
     buttonTrash = clonePost.querySelector('.post__trash'),
-    imagePost = clonePost.querySelector('.post__image');
+    imagePost = clonePost.querySelector('.post__image'),
+    namePost = clonePost.querySelector('.post__name');
 
-  clonePost.querySelector('.post__image').src = img;
-  clonePost.querySelector('.post__name').textContent = name;
+  imagePost.src = img;
+  imagePost.alt = name;
+  namePost.textContent = name;
 
-  likePost(buttonLike);
-  trashPost(buttonTrash);
-  openImage(imagePost, name);
+  buttonLike.addEventListener('click', () => {
+    likePost(buttonLike);
+  })
+  buttonTrash.addEventListener('click', () => {
+    trashPost(buttonTrash);
+  })
+  imagePost.addEventListener('click', () => {
+    openImage(imagePost, name);
+  })
 
   return clonePost;
 }
@@ -99,41 +94,42 @@ function createPost(img, name) {
 
 //Событие закрытие popup
 popupCloseList.forEach((item) => {
+  const popup = item.closest('.popup');
+  
   item.addEventListener('click', () => {
-    closePopap(item.closest('.popup'));
+    closePopap(popup);
   })
 })
 
 //Событие редактирование Профиля
 profileEdit.addEventListener('click', () => {
-  gettingDataProfil(profileName, profileDescription);
+  getDataProfil(profileName, profileDescription);
   openPopup(popupEditProfile);
 })
 
 //Событие добаление нового Поста
 postAdd.addEventListener('click', () => {
-  resetForm(popupNewPost);
+  formAddPost.reset()
   openPopup(popupNewPost);
 })
 
 //Событие сохранение данных профиля
-buttonSaveProfil.addEventListener('submit', savedProfil);
+formEditProfil.addEventListener('submit', saveProfil);
 
 //Событие создание нового поста
-buttonAddPost.addEventListener('submit', (event) => {
+formAddPost.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const target = event.target,
-    name = inputPostName.value.trim(),
+  const name = inputPostName.value.trim(),
     img = inputPostLink.value.trim();
   
   createPost(img, name);
-  closePopap(target.closest('.popup'));
+  closePopap(popupNewPost);
 })
 
 //Загрузка постов при старте страницы
 initialCards.forEach((item) => {
-  let img = item.link,
+  const img = item.link,
     name = item.name;
 
     createPost(img, name);
