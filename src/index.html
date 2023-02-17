@@ -10,17 +10,16 @@
   <meta name="author" content="Слаутин Алексей">
   <meta name="copyright" content="Все права принадлежат: ООО 'Яндекс'">
 
-  <link rel="icon" type="image/svg+xml" href="./images/favicon/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="<%=require('./favicon.svg')%>">
 
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="pages">
     <header class="header pages__header">
-      <img class="header__logo" src="./images/logo/logo.svg" alt="Логотип блога Mesto Russia">
+      <img class="header__logo" src="<%=require('./logo.svg')%>" alt="Логотип блога Mesto Russia">
     </header>
     <main>
       <section class="profile pages__profile">
-        <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар пользователя">
+        <img class="profile__avatar" src="<%=require('./avatar.jpg')%>" alt="Аватар пользователя">
         <div class="profile__info">
           <div class="profile__info-item">
             <h1 class="profile__name">
@@ -47,12 +46,16 @@
     <div class="popup popup_edit-profile">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
-        <form class="popup__form" id="saved-profil" action="#" name="edit-profile">
+        <form class="popup__form" id="saved-profil" action="#" name="edit-profile" novalidate>
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
-            <input class="popup__input-text" id="profil-name-surname" name="name-surname" type="text" placeholder="Ваше Имя и Фамилия">
-            <input class="popup__input-text" id="profil-about-me" name="about-me" type="text" placeholder="О себе">
+            <input class="popup__input-text" id="name-surname" name="name_surname" type="text" placeholder="Ваше Имя и Фамилия" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ -]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+            <span class="name-surname-error popup__message-error"></span>
+
+            <input class="popup__input-text" id="about-me" name="about_me" type="text" placeholder="О себе" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ -]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+            <span class="about-me-error popup__message-error"></span>
+
             <button class="popup__button-submit" name="saved-profil" type="submit">Сохранить</button>
         </form>
       </div>
@@ -60,12 +63,16 @@
     <div class="popup popup_add-post">
       <div class="popup__container">
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
-        <form class="popup__form" id="new-post" action="#" name="new-post">
+        <form class="popup__form" id="new-post" action="#" name="new-post" novalidate>
           <h2 class="popup__title">
             Новое место
           </h2>
-            <input class="popup__input-text" id="post-name" name="name-post" type="text" placeholder="Название" required>
-            <input class="popup__input-text" id="post-link" name="link-image" type="text" placeholder="Ссылка на картинку" required>
+            <input class="popup__input-text" id="post-name" name="name_post" type="text" placeholder="Название" minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-ЯёЁ -]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+            <span class="post-name-error popup__message-error"></span>
+
+            <input class="popup__input-text" id="post-link" name="link_image" type="url" placeholder="Ссылка на картинку" required>
+            <span class="post-link-error popup__message-error"></span>
+
             <button class="popup__button-submit" name="saved-post" type="submit">Создать</button>
         </form>
       </div>
@@ -87,8 +94,6 @@
         </div>
       </li>
     </template>
-
-    <script src="./vendor/cards.js"></script>
-    <script src="./script/index.js"></script>
+    
 </body>
 </html>

@@ -43,5 +43,9 @@
 @import url(../blocks/popup/__zoom-description/popup__zoom-description.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__input-text/popup__input-text.css);
+@import url(../blocks/popup/__input-text/_error/popup__input-text_error.css);/*Ошибка инпут*/
+@import url(../blocks/popup/__message-error/popup__message-error.css); /*сообщение ошибки*/
+@import url(../blocks/popup/__message-error/_active/popup__message-error_active.css); /*сообщение ошибки активное*/
 @import url(../blocks/popup/__button-submit/popup__button-submit.css);
+@import url(../blocks/popup/__button-submit/_disabled/popup__button-submit_disabled.css); /*отключенная кнопка*/
 @import url(../blocks/popup/__close/popup__close.css);
