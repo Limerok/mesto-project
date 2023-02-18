@@ -22,6 +22,11 @@ postAdd.addEventListener('click', () => {
 // Вызовем функцию валидации
 enableValidation(
   {
-    form: '.popup__form'
+    form: '.popup__form',
+    input: '.popup__input-text',
+    inputError: 'popup__input-text_error',
+    messageError: 'popup__message-error_active',
+    button: '.popup__button-submit',
+    buttonDisabled: 'popup__button-submit_disabled',
   }
 );

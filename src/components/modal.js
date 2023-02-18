@@ -31,8 +31,8 @@ function checkPopapClick (event) {
 }
 //Проверка закрытия по клавише ESC
 function checkPopapKeydown (event) {
-  const openPopup = document.querySelector('.popup_opened');
   if (event.key === 'Escape') {
+    const openPopup = document.querySelector('.popup_opened');
     closePopap(openPopup);
   } else {
     return
