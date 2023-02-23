@@ -1,4 +1,5 @@
 import { openPopup } from "./utils.js";
+import { postCards,myId,deleteCards,putLike,deleteLike } from "./api.js";
 
 const templatePost = document.querySelector('#template-post').content,
   cardsContainer = document.querySelector('.posts__list'),
@@ -6,47 +7,49 @@ const templatePost = document.querySelector('#template-post').content,
   imageZoom = document.querySelector('.popup__zoom-image'),
   descriptionZoom = document.querySelector('.popup__zoom-description');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-//Загрузка постов при старте страницы
-initialCards.forEach((item) => {
-  const img = item.link,
-    name = item.name;
 
-    createPost(img, name);
-})
+function checkLikeArr(arrLike) {
+  let like = false;
+  arrLike.forEach((item) => {
+    if (item._id === myId) {
+      like = true;
+    }
+  })
+  return like
+}
+
+function loadCardsStart(cards) {
+  const cardReverse = cards.reverse();
+  cardReverse.forEach((item) => {
+    const img = item.link,
+      name = item.name,
+      like = item.likes,
+      usersId = item.owner._id,
+      cardId = item._id;
+
+      createPost(img, name, like.length, myId, usersId, cardId, checkLikeArr(like));
+  })
+}
 
 //добавление события :Лайк поста
-function likePost(like) {
-  like.classList.toggle('post__like_active');
+function likePost(buttonLike, cardId, likeCount) {
+  const likeResult = buttonLike.classList.contains('post__like_active');
+  
+  if(!likeResult) {
+    putLike(cardId, likeCount)
+  } else {
+    deleteLike(cardId, likeCount)
+  }
+
+  buttonLike.classList.toggle('post__like_active');
 }
 
 //добавление события :Удаление поста
 function trashPost(trash) {
+  const cardId = trash.getAttribute('data-card-Id');
+
+  deleteCards(cardId);
+
   trash.closest('.post').remove();
 }
 
@@ -59,22 +62,36 @@ function openImage(image, name) {
 }
 
 //Генерация нового поста (перед добавлением)
-function renderPost(img, name) {
+function renderPost(img, name, likeCount, myId, usersId, cardId, chekLike) {
 const clonePost = templatePost.querySelector('.post').cloneNode(true),
   buttonLike = clonePost.querySelector('.post__like'),
-  buttonTrash = clonePost.querySelector('.post__trash'),
   imagePost = clonePost.querySelector('.post__image'),
-  namePost = clonePost.querySelector('.post__name');
+  buttonTrash = clonePost.querySelector('.post__trash'),
+  namePost = clonePost.querySelector('.post__name'),
+  like = clonePost.querySelector('.post__like-count');
+
+  if(chekLike) {
+    buttonLike.classList.add('post__like_active')
+  }
+
+  if (myId == usersId) {
+    buttonTrash.setAttribute('data-card-Id', cardId);
+
+    buttonTrash.addEventListener('click', () => {
+      trashPost(buttonTrash);
+    })
+  } else {
+    buttonTrash.remove();
+  }
 
   imagePost.src = img;
   imagePost.alt = name;
   namePost.textContent = name;
+  like.textContent = likeCount;
+  buttonLike.setAttribute('data-card-Id', cardId);
 
   buttonLike.addEventListener('click', () => {
-    likePost(buttonLike);
-  })
-  buttonTrash.addEventListener('click', () => {
-    trashPost(buttonTrash);
+    likePost(buttonLike, cardId, like);
   })
   imagePost.addEventListener('click', () => {
     openImage(imagePost, name);
@@ -84,10 +101,10 @@ const clonePost = templatePost.querySelector('.post').cloneNode(true),
 }
 
 //Добавление Поста на страницу
-function createPost(img, name) {
-  const newPost = renderPost(img, name);
+function createPost(img, name, like, myId, usersId, cardId, chekLike=false) {
+  const newPost = renderPost(img, name, like, myId, usersId, cardId, chekLike);
 
   cardsContainer.prepend(newPost);
 }
 
-export {createPost}
+export {createPost,loadCardsStart}

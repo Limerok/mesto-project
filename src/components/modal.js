@@ -1,5 +1,6 @@
-import { profileName,profileDescription,popupEditProfile} from "./utils.js";
+import { profileName,profileDescription,popupEditProfile,popupAvatar,profileAvatar} from "./utils.js";
 import { createPost } from "./card.js";
+import { patchDataProfile, postCards,patchAvatar } from "./api.js";
 
 const formEditProfil = document.querySelector('#saved-profil'),
   inputNameSurname = document.querySelector('#name-surname'),
@@ -7,7 +8,9 @@ const formEditProfil = document.querySelector('#saved-profil'),
   formAddPost = document.querySelector('#new-post'),
   inputPostName = document.querySelector('#post-name'),
   inputPostLink = document.querySelector('#post-link'),
-  popupNewPost = document.querySelector('.popup_add-post');
+  popupNewPost = document.querySelector('.popup_add-post'),
+  formNewAvatar = document.querySelector('#new-avatar'),
+  inputAvatar = document.querySelector('#avatar-link');
 
 
 //Закрытие Попап
@@ -40,16 +43,24 @@ function checkPopapKeydown (event) {
 }
 
 //Получение данных профиля
-function getDataProfil(name, about) {
+function getModalProfil(name, about) {
   inputNameSurname.value = name.textContent.trim();
   inputAboutMe.value = about.textContent.trim();
 }
-//Сохранение данных профиля
+
+//Обновление данных профиля на странице
+function updateProfil(result) {
+  profileName.textContent = result.name;
+  profileDescription.textContent = result.about;
+}
+//Сохранение данных профиля на сервере
 function saveProfil(event) {
   event.preventDefault();
 
-  profileName.textContent = inputNameSurname.value.trim();
-  profileDescription.textContent = inputAboutMe.value.trim();
+  renderLoading(true, formEditProfil.querySelector('.popup__button-submit'));
+  patchDataProfile(inputNameSurname.value.trim(),inputAboutMe.value.trim());
+  //profileName.textContent = inputNameSurname.value.trim();
+  //profileDescription.textContent = inputAboutMe.value.trim();
   closePopap(popupEditProfile);
 }
 
@@ -63,8 +74,32 @@ formAddPost.addEventListener('submit', (event) => {
   const name = inputPostName.value.trim(),
     img = inputPostLink.value.trim();
   
-  createPost(img, name);
+  renderLoading(true, formAddPost.querySelector('.popup__button-submit'));
+  postCards(name, img);
+  
   closePopap(popupNewPost);
 })
+function updateAvatar(newAvatar) {
+  profileAvatar.src = newAvatar;
+}
+//Событие сохранение аватарки
+formNewAvatar.addEventListener('submit', (event) => {
+  event.preventDefault();
 
-export { closePopap,getDataProfil,checkPopapClick,checkPopapKeydown,formAddPost,popupNewPost }
+  const avatarUrl = inputAvatar.value.trim();
+  renderLoading(true, formNewAvatar.querySelector('.popup__button-submit'));
+  patchAvatar(avatarUrl);
+
+  closePopap(popupAvatar);
+})
+
+function renderLoading(isLoading, button) {
+  if(isLoading){
+    button.textContent = 'Сохранение...';
+  } else {
+    button.textContent = 'Сохраненить';
+  }
+  
+}
+
+export { closePopap,getModalProfil,checkPopapClick,checkPopapKeydown,formAddPost,popupNewPost,updateProfil,formNewAvatar,updateAvatar,renderLoading,formEditProfil }

@@ -2,7 +2,9 @@ import { checkPopapClick,checkPopapKeydown } from "./modal.js";
 
 const profileName = document.querySelector('.profile__name'),
   profileDescription = document.querySelector('.profile__description'),
-  popupEditProfile = document.querySelector('.popup_edit-profile');
+  popupEditProfile = document.querySelector('.popup_edit-profile'),
+  profileAvatar = document.querySelector('.profile__avatar'),
+  popupAvatar = document.querySelector('.popup_add-avatar');
 
 //Открытие Попап
 function openPopup(popup) {
@@ -13,4 +15,4 @@ function openPopup(popup) {
 }
   
 
-export {profileName,profileDescription,popupEditProfile,openPopup}
+export {profileName,profileDescription,popupEditProfile,openPopup,profileAvatar,popupAvatar}

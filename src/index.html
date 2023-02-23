@@ -19,16 +19,19 @@
     </header>
     <main>
       <section class="profile pages__profile">
-        <img class="profile__avatar" src="<%=require('./avatar.jpg')%>" alt="Аватар пользователя">
+        <div class="profile__avatar-block">
+          <img class="profile__avatar" alt="Аватар пользователя">
+          <button class="profile__add-avatar" type="button" aria-label="Добавить аватар"></button>
+        </div>
         <div class="profile__info">
           <div class="profile__info-item">
             <h1 class="profile__name">
-              Жак-Ив Кусто
+              
             </h1>
             <button class="profile__edit" type="button" aria-label="Редактировать профиль"></button>
           </div>
           <p class="profile__description">
-            Исследователь океана
+            
           </p>
         </div>
         <button class="profile__add-post" type="button" aria-label="Добавить новость"></button>
@@ -73,7 +76,21 @@
             <input class="popup__input-text" id="post-link" name="link_image" type="url" placeholder="Ссылка на картинку" required>
             <span class="post-link-error popup__message-error"></span>
 
-            <button class="popup__button-submit" name="saved-post" type="submit">Создать</button>
+            <button class="popup__button-submit" name="saved-post" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_add-avatar">
+      <div class="popup__container">
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <form class="popup__form" id="new-avatar" action="#" name="new-avatar" novalidate>
+          <h2 class="popup__title">
+            Обновить аватар
+          </h2>
+            <input class="popup__input-text" id="avatar-link" name="link_image" type="url" placeholder="Ссылка на фото" required>
+            <span class="avatar-link-error popup__message-error"></span>
+
+            <button class="popup__button-submit" name="saved-avatar" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
@@ -90,7 +107,10 @@
         <img class="post__image" src="" alt="">
         <div class="post__group">
           <h2 class="post__name"></h2>
-          <button class="post__like" type="button" aria-label="Мне нравится"></button>
+          <div class="post__like-block">
+            <button class="post__like" type="button" aria-label="Мне нравится"></button>
+            <span class="post__like-count"> 6</span>
+          </div>
         </div>
       </li>
     </template>

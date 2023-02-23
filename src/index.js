@@ -1,15 +1,23 @@
 import './index.css';
 
+import { getCards,getDataProfile,getAvatar } from './components/api.js';
 import { enableValidation } from "./components/validate.js";
-import { getDataProfil,formAddPost,popupNewPost } from "./components/modal.js";
-import { profileName,profileDescription,popupEditProfile,openPopup } from "./components/utils.js";
+import { getModalProfil,formAddPost,popupNewPost,formNewAvatar } from "./components/modal.js";
+import { profileName,profileDescription,popupEditProfile,openPopup,popupAvatar } from "./components/utils.js";
 
 const profileEdit = document.querySelector('.profile__edit'),
-  postAdd = document.querySelector('.profile__add-post');
-  
+  postAdd = document.querySelector('.profile__add-post'),
+  profileAvatarButton = document.querySelector('.profile__add-avatar');
+
+//Событие добавление Аватарки
+profileAvatarButton.addEventListener('click', () => {
+  formNewAvatar.reset();
+  openPopup(popupAvatar);
+})
+
 //Событие редактирование Профиля
 profileEdit.addEventListener('click', () => {
-  getDataProfil(profileName, profileDescription);
+  getModalProfil(profileName, profileDescription);
   openPopup(popupEditProfile);
 })
 
@@ -30,3 +38,6 @@ enableValidation(
     buttonDisabled: 'popup__button-submit_disabled',
   }
 );
+
+getDataProfile()
+getCards()
