@@ -13,6 +13,13 @@ function openPopup(popup) {
   popup.addEventListener('click', checkPopapClick);
   document.addEventListener('keydown', checkPopapKeydown);
 }
+
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка ${res.status}`);
+}
   
 
-export {profileName,profileDescription,popupEditProfile,openPopup,profileAvatar,popupAvatar}
+export {profileName,profileDescription,popupEditProfile,openPopup,profileAvatar,popupAvatar,checkResponse}

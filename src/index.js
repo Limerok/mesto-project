@@ -1,9 +1,27 @@
 import './index.css';
 
-import { getCards,getDataProfile,getAvatar } from './components/api.js';
+import { loadCardsStart } from './components/card.js';
+import { getCards,getDataProfile } from './components/api.js';
 import { enableValidation } from "./components/validate.js";
 import { getModalProfil,formAddPost,popupNewPost,formNewAvatar } from "./components/modal.js";
-import { profileName,profileDescription,popupEditProfile,openPopup,popupAvatar } from "./components/utils.js";
+import { profileName,profileDescription,popupEditProfile,openPopup,popupAvatar,profileAvatar } from "./components/utils.js";
+
+let myId = '';
+
+//Загрузка профиля и карточек при старте
+Promise.all([getDataProfile(), getCards()])
+  .then(([userData, cards]) => {
+    // тут установка данных пользователя
+    profileName.textContent = userData.name;
+    profileDescription.textContent = userData.about;
+    profileAvatar.src = userData.avatar;
+    myId = userData._id;
+    // и тут отрисовка карточек
+    loadCardsStart(cards)
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 const profileEdit = document.querySelector('.profile__edit'),
   postAdd = document.querySelector('.profile__add-post'),
@@ -39,5 +57,4 @@ enableValidation(
   }
 );
 
-getDataProfile()
-getCards()
+export {myId}

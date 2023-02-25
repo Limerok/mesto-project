@@ -1,5 +1,6 @@
 import { openPopup } from "./utils.js";
-import { postCards,myId,deleteCards,putLike,deleteLike } from "./api.js";
+import { deleteCards,putLike,deleteLike } from "./api.js";
+import { myId } from "../index.js";
 
 const templatePost = document.querySelector('#template-post').content,
   cardsContainer = document.querySelector('.posts__list'),
@@ -36,21 +37,37 @@ function likePost(buttonLike, cardId, likeCount) {
   const likeResult = buttonLike.classList.contains('post__like_active');
   
   if(!likeResult) {
-    putLike(cardId, likeCount)
+    putLike(cardId)
+      .then((result) => {
+        likeCount.textContent = result.likes.length;
+        buttonLike.classList.toggle('post__like_active');
+      })
+      .catch((err) => {
+        console.log(err); // "Что-то пошло не так: ..."
+      })
   } else {
-    deleteLike(cardId, likeCount)
+    deleteLike(cardId)
+      .then((result) => {
+        likeCount.textContent = result.likes.length;
+        buttonLike.classList.toggle('post__like_active');
+      })
+      .catch((err) => {
+        console.log(err); // "Что-то пошло не так: ..."
+      })
   }
-
-  buttonLike.classList.toggle('post__like_active');
 }
 
 //добавление события :Удаление поста
 function trashPost(trash) {
   const cardId = trash.getAttribute('data-card-Id');
 
-  deleteCards(cardId);
-
-  trash.closest('.post').remove();
+  deleteCards(cardId)
+    .then(() => {
+      trash.closest('.post').remove();
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    })
 }
 
 //добавление события :Открытие большого изображения
@@ -58,6 +75,7 @@ function openImage(image, name) {
   imageZoom.src = image.getAttribute('src');
   imageZoom.alt = name;
   descriptionZoom.textContent = name;
+  
   openPopup(popupZoomImage);
 }
 

@@ -1,6 +1,7 @@
 import { profileName,profileDescription,popupEditProfile,popupAvatar,profileAvatar} from "./utils.js";
 import { createPost } from "./card.js";
 import { patchDataProfile, postCards,patchAvatar } from "./api.js";
+import { myId } from "../index.js";
 
 const formEditProfil = document.querySelector('#saved-profil'),
   inputNameSurname = document.querySelector('#name-surname'),
@@ -12,11 +13,9 @@ const formEditProfil = document.querySelector('#saved-profil'),
   formNewAvatar = document.querySelector('#new-avatar'),
   inputAvatar = document.querySelector('#avatar-link');
 
-
 //Закрытие Попап
 function closePopap(popup) {
   popup.classList.remove('popup_opened');
-
   popup.removeEventListener('click', checkPopapClick);
   document.removeEventListener('keydown', checkPopapKeydown);
 }
@@ -57,11 +56,18 @@ function updateProfil(result) {
 function saveProfil(event) {
   event.preventDefault();
 
-  renderLoading(true, formEditProfil.querySelector('.popup__button-submit'));
-  patchDataProfile(inputNameSurname.value.trim(),inputAboutMe.value.trim());
-  //profileName.textContent = inputNameSurname.value.trim();
-  //profileDescription.textContent = inputAboutMe.value.trim();
-  closePopap(popupEditProfile);
+  renderLoading(true, event.submitter);
+  patchDataProfile(inputNameSurname.value.trim(),inputAboutMe.value.trim())
+    .then((result) => {
+      updateProfil(result);
+      closePopap(popupEditProfile);
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    })
+    .finally(() => {
+      renderLoading(false, event.submitter);
+    })
 }
 
 //Событие сохранение данных профиля
@@ -74,30 +80,55 @@ formAddPost.addEventListener('submit', (event) => {
   const name = inputPostName.value.trim(),
     img = inputPostLink.value.trim();
   
-  renderLoading(true, formAddPost.querySelector('.popup__button-submit'));
-  postCards(name, img);
-  
-  closePopap(popupNewPost);
+  renderLoading(true, event.submitter);
+  postCards(name, img)
+    .then((result) => {
+      const img = result.link,
+        name = result.name,
+        likeCount = result.likes.length,
+        usersId = result.owner._id,
+        cardId = result._id;
+
+      createPost(img, name, likeCount, myId, usersId, cardId);
+      closePopap(popupNewPost);
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    })
+    .finally(() => {
+      renderLoading(false, event.submitter);
+    })
 })
+
 function updateAvatar(newAvatar) {
   profileAvatar.src = newAvatar;
 }
+
 //Событие сохранение аватарки
 formNewAvatar.addEventListener('submit', (event) => {
   event.preventDefault();
 
   const avatarUrl = inputAvatar.value.trim();
-  renderLoading(true, formNewAvatar.querySelector('.popup__button-submit'));
-  patchAvatar(avatarUrl);
 
-  closePopap(popupAvatar);
+  renderLoading(true, event.submitter);
+  patchAvatar(avatarUrl)
+    .then((result) => {
+      updateAvatar(result.avatar);
+      closePopap(popupAvatar);
+    })
+    .catch((err) => {
+      console.log(err); // "Что-то пошло не так: ..."
+    })
+    .finally(() => {
+      renderLoading(false, event.submitter);
+    })
 })
 
-function renderLoading(isLoading, button) {
+function renderLoading(isLoading, button, buttonText='Сохранить', loadingText='Сохранение...') {
   if(isLoading){
-    button.textContent = 'Сохранение...';
+    button.textContent = loadingText;
   } else {
-    button.textContent = 'Сохраненить';
+    button.textContent = buttonText;
   }
   
 }
